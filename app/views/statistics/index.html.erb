@@ -1,0 +1,190 @@
+<%
+  def calculate_medians
+    @m1 = []
+    @m2 = []
+    @m3 = []
+    @m4 = []
+    @m5 = []
+    @m6 = []
+    @m7 = []
+
+    @game_performances = @player.game_performances
+    @game_performances.each do |game|
+      @m1 << game.goals
+      @m2 << game.assists
+      @m3 << game.yellow_cards
+      @m4 << game.red_cards
+      @m5 << game.shots_per_game
+      @m6 << game.pass_success_percentage
+      @m7 << game.aerial_duels_won
+    end
+
+    @m1 = median(@m1)
+    @m2 = median(@m2)
+    @m3 = median(@m3)
+    @m4 = median(@m4)
+    @m5 = median(@m5)
+    @m6 = median(@m6)
+    @m7 = median(@m7)
+  end
+
+  def median(array)
+    sorted = array.sort
+    len = sorted.length
+    (sorted[(len - 1) / 2] + sorted[len / 2]) / 2.0
+  end
+%>
+
+<hr>
+
+<div class="container">
+  <div class="row">
+    <div class="span2">
+      <%=image_tag(@player.image) %>
+    </div>
+
+    <div class="span10">
+      <div class="table">
+        <legend>Averages</legend>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th>Average Goals</th>
+                <th>Average Assists</th>
+                <th>Average Yellow Cards</th>
+                <th>Average Red Cards</th>
+                <th>Average Shots Per Game</th>
+                <th>Average Pass Success Percentage</th>
+                <th>Average Aerial Duels Won</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><%= @average_goals %></td>
+                <td><%= @average_assists %></td>
+                <td><%= @average_yellow_cards %></td>
+                <td><%= @average_red_cards %></td>
+                <td><%= @average_spg %></td>
+                <td><%= @average_psp %></td>
+                <td><%= @average_duels %></td>
+              </tr>
+            </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+<div>
+
+<div class="container">
+  <div class="row">
+    <div class="span12">
+      <legend>Medians</legend>
+      <table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th>Median Goals</th>
+            <th>Median Assists</th>
+            <th>Median Yellow Cards</th>
+            <th>Median Red Cards</th>
+            <th>Median Shots Per Game</th>
+            <th>Median Pass Success Percentage</th>
+            <th>Median Aerial Duels Won</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <% calculate_medians %>
+            <td><%=@m1%></td>
+            <td><%=@m2%></td>
+            <td><%=@m3%></td>
+            <td><%=@m4%></td>
+            <td><%=@m5%></td>
+            <td><%=@m6%></td>
+            <td><%=@m7%></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="span12">
+      <legend>Sums</legend>
+      <table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th>Sum Goals</th>
+            <th>Sum Assists</th>
+            <th>Sum Yellow Cards</th>
+            <th>Sum Red Cards</th>
+            <th>Sum Shots Per Game</th>
+            <th>Sum Pass Success Percentage</th>
+            <th>Sum Aerial Duels Won</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <% @s1 = 0 %>
+              <% @player.game_performances.each do |game| %>
+               <% @s1 += game.goals %>
+              <% end %>
+
+             <%= @s1 %>
+            </td>
+            <td>
+              <% @s2 = 0 %>
+              <% @player.game_performances.each do |game| %>
+               <% @s2 += game.assists %>
+              <% end %>
+
+             <%= @s2 %>
+            </td>
+            <td>
+              <% @s3 = 0 %>
+              <% @player.game_performances.each do |game| %>
+               <% @s3 += game.yellow_cards %>
+              <% end %>
+
+             <%= @s3 %>
+            </td>
+            <td>
+              <% @s4 = 0 %>
+              <% @player.game_performances.each do |game| %>
+               <% @s4 += game.red_cards %>
+              <% end %>
+
+             <%= @s4 %>
+            </td>
+            <td>
+              <% @s5 = 0 %>
+              <% @player.game_performances.each do |game| %>
+               <% @s5 += game.shots_per_game %>
+              <% end %>
+
+             <%= @s5 %>
+            </td>
+            <td>
+              <% @s6 = 0 %>
+              <% @player.game_performances.each do |game| %>
+               <% @s6 += game.pass_success_percentage %>
+              <% end %>
+
+             <%= @s6 %>
+            </td>
+            <td>
+              <% @s7 = 0 %>
+              <% @player.game_performances.each do |game| %>
+               <% @s7 += game.aerial_duels_won %>
+              <% end %>
+
+             <%= @s7 %>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,57 @@
+{
+  "title": "Version 1.0 - updated",
+  "description": "Schema definition for messages sent by product Version 1.0",
+  "type": "object",
+  "properties": {
+    "hash": {
+      "description": "Computed MD5 of message object",
+      "type": "string"
+    },
+    "message": {
+      "description": "Event message",
+      "type": "object",
+      "properties": {
+        "_id": {
+          "description": "Unique id of the message",
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9]*$"
+        },
+        "eventType": {
+          "description": "Type of event sent",
+          "type": "string"
+        },
+        "eventValue": {
+          "description": "Value for the event type",
+          "type": "string"
+        },
+        "userId": {
+          "description": "User identifier",
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9]*$"
+        },
+        "ipAddress": {
+          "description": "IP address of user",
+          "type": "string"
+        },
+        "timestamp": {
+          "description": "ISO 8601 formatted date",
+          "type": "string"
+        }
+      },
+      "required": [
+        "_id",
+        "eventType",
+        "eventValue",
+        "userId",
+        "ipAddress",
+        "timestamp"
+      ],
+      "additionalItems": false
+    }
+  },
+  "required": [
+    "hash",
+    "message"
+  ],
+  "additionalItems": false
+}
