@@ -8,26 +8,14 @@ class Team < ActiveRecord::Base
     all_players = []
     ids.each do |id|
       team = Team.find(id)
-      player_ids = team.players.collect(&:id)
-      player_ids.each do |pid|
-        player_info = {}
-        player = Player.find(pid)
-        player_info[:id] = player.id
-        player_info[:first_name] = player.first_name
-        player_info[:last_name] = player.last_name
-
-        team = Team.find(player.team_id)
-        player_info[:team] = team.name
-        player_info[:position] = team.players.find(pid).position
-        all_players << player_info
+      Team.find(id).players.each do |player|
+        all_players << {
+          id: player.id,
+          name: "#{player.first_name} #{player.last_name}",
+          position: player.position,
+          team: team.name
+        }
       end
-    end
-
-    all_players.each do |player|
-      p = Player.find(player[:id])
-      player[:name] = p.first_name + ' ' + p.last_name
-      player.delete(:first_name)
-      player.delete(:last_name)
     end
 
     all_players

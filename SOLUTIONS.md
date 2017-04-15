@@ -7,16 +7,16 @@
 ## 1. Queries on Queries
 
   def self.get_players(ids = [])
-    all_players = ids.map do |id|
+    all_players = []
+    ids.each do |id|
       team = Team.find(id)
-      Team.find(id).players.map do |player|
-        player_info = {
-          id => player.id
-          name => player.first_name + ' ' + player.last_name
-          position => player.position
-          team => team.name
+      Team.find(id).players.each do |player|
+        all_players << {
+          id: player.id,
+          name: "#{player.first_name} #{player.last_name}",
+          position: player.position,
+          team: team.name
         }
-        player = player_info
       end
     end
 
