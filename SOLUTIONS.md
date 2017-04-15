@@ -6,7 +6,25 @@
 
 ## 1. Queries on Queries
 
----
+  def self.get_players(ids = [])
+    all_players = ids.map do |id|
+      team = Team.find(id)
+      Team.find(id).players.map do |player|
+        player_info = {
+          id => player.id
+          name => player.first_name + player.last_name
+          position => player.position
+          team => team.name
+        }
+        player = player_info
+      end
+    end
+
+    all_players
+  end
+
+
+
 
 ## 2. Abstraction, DRY, and Best Practices
 
@@ -53,8 +71,14 @@ function romanNumeralsToInt (str) {
 # Data Challenges
 
 ## 5. Relational Databases
+1.
+  CREATE TABLE Company (
+    Id integer primary key,
+    Name char(255)
+  );
+  CREATE TABLE Medical_plans (
 
----
+  );
 
 ## 6. All Mixed-Up (Optional)
 
