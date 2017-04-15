@@ -12,7 +12,7 @@
       Team.find(id).players.map do |player|
         player_info = {
           id => player.id
-          name => player.first_name + player.last_name
+          name => player.first_name + ' ' + player.last_name
           position => player.position
           team => team.name
         }
@@ -22,8 +22,6 @@
 
     all_players
   end
-
-
 
 
 ## 2. Abstraction, DRY, and Best Practices
