@@ -100,8 +100,30 @@ function romanNumeralsToInt (str) {
     medical_premium decimal
   );
 
-2.
+2. SELECT * FROM Medical_plans WHERE company_id = company.id;
 
+3. SELECT AVG(age), AVG(salary), MIN(salary), MAX(salary)
+    FROM Employees
+    GROUP BY company_id;
+
+4. SELECT *
+    FROM (
+      SELECT employee_group_id, MAX(plan_count)
+      FROM (
+        SELECT employee_group_id, COUNT(medical_plan_id) AS plan_count
+        FROM Medical_plans_Employee_groups
+        GROUP BY employee_group_id)
+     ) AS top
+  JOIN Employee_groups AS eg ON top.employee_group_id = eg.id
+  JOIN Companies AS c ON eg.company_id = c.id;
+
+5. SELECT *, MAX(percentage)
+    FROM (
+      SELECT *, ROUND(medical_premium / salary) AS percentage
+      FROM Employees AS e
+      JOIN Employee_groups AS eg ON e.employee_group_id = eg.id
+    ) AS joined
+    GROUP BY joined.company_id
 
 ## 6. All Mixed-Up (Optional)
 
