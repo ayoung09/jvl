@@ -70,12 +70,34 @@ function romanNumeralsToInt (str) {
 
 ## 5. Relational Databases
 1.
-  CREATE TABLE Company (
-    Id integer primary key,
-    Name char(255)
+  CREATE TABLE Companies (
+    id int PRIMARY KEY AUTO_INCREMENT,
+    name varchar(255) NOT NULL
   );
   CREATE TABLE Medical_plans (
-
+    id int PRIMARY KEY AUTO_INCREMENT,
+    name varchar(255) NOT NULL,
+    company_id int FOREIGN KEY REFERENCES Companies(id) NOT NULL
+  );
+  CREATE TABLE Employee_groups (
+    id int PRIMARY KEY AUTO_INCREMENT,
+    name varchar(255) NOT NULL,
+    company_id int FOREIGN KEY REFERENCES Companies(id) NOT NULL
+  );
+  CREATE TABLE Medical_plans_Employee_groups (
+    id int PRIMARY KEY AUTO_INCREMENT,
+    medical_plan_id int FOREIGN KEY REFERENCES Medical_plans(id) NOT NULL,
+    employee_group_id int FOREIGN KEY REFERENCES Employee_groups(id) NOT NULL
+  );
+  CREATE TABLE Employee (
+    id int PRIMARY KEY AUTO_INCREMENT,
+    first_name varchar(50) NOT NULL,
+    last_name varchar(50) NOT NULL,
+    age int NOT NULL,
+    salary decimal NOT NULL,
+    employee_group_id int FOREIGN KEY REFERENCES Employee_groups(id) NOT NULL,
+    medical_plan_employee_group_id int FOREIGN KEY REFERENCES Medical_plans_Employee_groups(id),
+    medical_premium decimal
   );
 
 ## 6. All Mixed-Up (Optional)
