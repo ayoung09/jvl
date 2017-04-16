@@ -31,5 +31,5 @@
 *.swo
 
 Instructions.md
-SOLUTIONS.md
-/app
+Solutions_revised.md
+app/
