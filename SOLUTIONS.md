@@ -26,7 +26,7 @@
 
 ## 2. Abstraction, DRY, and Best Practices
 
---- Note: While I understand the principal of Fat Models, Skinny Controllers, due to my unfamiliarity with Ruby on Rails, I was unable to complete this refactor within the given time constraints.
+--- Note: While I understand the principal of Fat Models, Skinny Controllers, due to my unfamiliarity with Ruby on Rails, I was unable to complete this refactor within the given time constraints. Much of my time was spent researching/reading documentation about Ruby/Rails, so I thank you for the learning opportunity.
 Conceptually, I would move the average calculations being done on the controller to the game_performance model.
 
 ## 3. Background Jobs (Optional)
